@@ -1,0 +1,43 @@
+<div class="container">
+    <h1 class="text-center">Voting</h1>
+
+
+    <div class="form col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 my-4">
+
+        <div class="mb-3">
+            <label for="car" class="form-label">Selected car:</label>
+            <select id="car" class="form-select" name="carId" [(ngModel)]="vote.carId">
+                <option value="">Please select</option>
+                @for (car of cars; track $index) {
+                    <option [value]="car.id" [selected]="car.id.toString() === vote.carId">{{car.model}}</option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Your e-mail address:</label>
+            <input type="text" class="form-control" id="email" name="email" [(ngModel)]="vote.email">
+        </div>
+   
+        <div class="mb-3">
+            <label for="comment" class="form-label">Comment:</label>
+            <textarea id="comment"class="form-control" rows="3" name="comment" [(ngModel)]="vote.comment"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <input type="checkbox" id="acceptedConditions" class="form-check-input" name="tou" [(ngModel)]="vote.tou">
+            <label for="acceptedConditions" class="form-check-label">Accept terms of use</label>
+        </div>
+
+        <div class="mb-3 text-center">
+            <input type="button" value="Vote" class="btn btn-primary" (click)="voteClick()">
+        </div>
+
+
+        @if (errorMsg) {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{errorMsg}}
+                <button type="button" (click)="errorMsg=''" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+</div>
